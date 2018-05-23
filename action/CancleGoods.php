@@ -1,14 +1,18 @@
 <?php
-//êµ¬ìž…í•œ ìƒí’ˆì„ ì·¨ì†Œ
+//ƒJ[ƒg‚É“ü‚ê‚½¤•i‚ðŽæ‚èÁ‚·PHP
   require_once "goodsAction.php";
 
   $nameMenu     = $_POST['menu_name'];
   $numMenu      =  $_POST['menu_num'];
 
+  //¤•i‚Ì“®ì‚ÉŠÖ‚·‚éƒNƒ‰ƒX
   $goods_func   = new goodsfunc();
-  //ìž¬ê³ ëŸ‰ì„ ì›ëž˜ë¡œ ë˜ëŒë¦¬ëŠ” í•¨ìˆ˜.
+
+  //ÝŒÉ‚ðŒ¸‚ç‚·‘O‚É–ß‚é
   $goods_func->backbalance($nameMenu, $numMenu);
-  //ë‹´ì€ ë¬¼í’ˆì„ ì œê±°
+
+  //ƒJ[ƒg‚©‚ç¤•i‚ðÁ‚·
   $goods_func->deletehistory($nameMenu, $numMenu);
+
   print "<script>history.go(-1)</script>";
 ?>

@@ -1,13 +1,13 @@
 <?php
-//QNAê²Œì‹œíŒê³¼ ê´€ë ¨ëœ í–‰ìœ„ë“¤
+//QNAŒf¦”Â‚Ì‹@”\‚ğ’è‹`‚µ‚½PHPiDB‚Æ‚Ì˜AŒ‹j
   session_start();
-
-  //QNAê²Œì‹œíŒê³¼ ê´€ë ¨ëœ ëª¨ë“  ì‹¤í–‰ í•¨ìˆ˜ ë³´ê´€
+  require_once "../DB/mydb.php";
+  //QNAŒf¦”Â‚Ìì“®‚ÉŠÖ‚·‚é‹@”\‚ÌƒNƒ‰ƒX
   class QNAAction{
 
-    //QNAê²Œì‹œíŒì— ìƒˆë¡œìš´ê¸€ ì‘ì„±
+    //QNAŒf¦”Â‚ÉV‚µ‚¢POST‚ğì¬
     function inputValueToDb($title, $content){
-      require_once "../DB/mydb.php";
+
       try {
         $pdo = db_connect();
         // qna_num int unsigned not null primary key auto_increment,
@@ -28,7 +28,7 @@
         $result = $stt->rowCount();
 
         if($result){
-          print "<script>alert('ê¸€ ì“°ê¸° ì™„ë£Œ')</script>";
+          print "<script>alert('E€ E°E° EE£E)</script>";
           print "<script>location.replace('../form/QNAform.php');</script>";
         }
       } catch (Exception $e) {
@@ -36,9 +36,8 @@
       }
     }
 
-    //QNAê²Œì‹œíŒì— ë“±ë¡ëœ ëª¨ë“  ê²Œì‹œê¸€ ì¶œë ¥
+    //QNAŒf¦”Â‚Ì‘S‚Ä‚Ìpost‚ğo—Í
     function showQnaMain(){
-      require_once "../DB/mydb.php";
       try {
         $pdo = db_connect();
 
@@ -51,9 +50,8 @@
       return $stt;
     }
 
-    //í•˜ë‚˜ì˜ ê²Œì‹œê¸€ì— ëŒ€í•œ êµ¬ì²´ì ì¸ ë‚´ìš© ì¶œë ¥
+    //QNAŒf¦”Â‚Ì‚ ‚épost‚ÌÚ‚µ‚¢î•ñŒ©‚¹‚é
     function showDetailQna($num){
-      require_once "../DB/mydb.php";
       try {
         $pdo = db_connect();
         $sql = "SELECT * FROM qnaboard WHERE qna_num=$num";
@@ -67,9 +65,8 @@
       return $row;
     }
 
-    //ê²Œì‹œê¸€ì— ëŒ€í•œ ëŒ“ê¸€ ì¶œë ¥
+    //‚ ‚éŒf¦”Â‚ÌƒŠƒv‚ğŒ©‚¹‚é
     function comment($bno){
-      require_once "../DB/mydb.php";
       try {
         $pdo = db_connect();
         // qna_num int NOT NULL,

@@ -1,5 +1,5 @@
 <?php
-//ëŒ“ê¸€ê¸°ëŠ¥(ë°ì´í„°ë² ì´ìŠ¤ì— ê´€ë ¨ ì •ë³´ ì €ìž¥)
+//ŒfŽ¦”Â‚Å‚ÌƒŠƒv‹@”\‚ÌPHP
   session_start();
   require_once "../DB/mydb.php";
 
@@ -12,16 +12,17 @@
   // comment_id varchar(50) NOT NULL,
   // commnet_date datetime NOT NULL
 
-  //ë°ì´í„° ë² ì´ìŠ¤ì— ë²ˆí˜¸, ë‚´ì˜, ìž‘ì„±ìž id, ìž‘ì„± ë‚ ì§œë¥¼ ìž…ë ¥
+  //“ü—Í‚µ‚½ƒŠƒv‚ðDB‚É•Û‘¶‚·‚é
   try {
     $pdo    = db_connect();
-    $sql    = "INSERT INTO comment( qna_num,  comment,  comment_id, commnet_date )
-               VALUES( '$qna_num', '$comment_text', '$id', '$date' )";
+
+    $sql    = "INSERT INTO comment( qna_num,		comment,			comment_id,		commnet_date )
+							VALUES( '$qna_num',		'$comment_text',	'$id',			'$date' )";
     $stt    = $pdo->prepare($sql);
     $stt->execute();
     $result = $stt->rowCount();
     if($result){
-      print "<script>alert('ëŒ“ê¸€ ìž…ë ¥')</script>";
+      print "<script>alert('ƒŠƒvŠ®—¹')</script>";
       print "<script>history.go(-1)</script>";
     }
 

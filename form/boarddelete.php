@@ -28,12 +28,12 @@
     <form name="delete_board" action="../action/deleteboard.php" method="post">
         <input type="hidden" name="bno" value="<?php echo $bNo?>">
         <div class="main">
-            <label>ë¹„ë°€ë²ˆí˜¸ ìž…ë ¥ : </label>
-            <input type="password" name="delete_check_password" placeholder="ë¹„ë°€ë²ˆí˜¸ ìž…ë ¥" required>
+            <label>EE°€Eˆí˜¸ EE ¥ : </label>
+            <input type="password" name="delete_check_password" placeholder="EE°€Eˆí˜¸ EE ¥" required>
         </div>
-            <input type="button" onclick="history.go(-1)" value="ë’¤ë¡œê°€ê¸°">
-            <!--<a href="../action/deleteboard.php?bno="><input type="button"  value="í™•ì¸" "></a>-->
-            <button type="submit">í™•ì¸</button>
+            <input type="button" onclick="history.go(-1)" value="E¤Eœê°€E°">
+            <!--<a href="../action/deleteboard.php?bno="><input type="button"  value="úµ•ì¸" "></a>-->
+            <button type="submit">úµ•ì¸</button>
     </form>
 </div>
 </body>

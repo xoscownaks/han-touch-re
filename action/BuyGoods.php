@@ -1,29 +1,31 @@
 <?php
-//ìƒí’ˆêµ¬ì…
+//‚±‚±‚Í¤•i‚ğƒJ[ƒg‚É“ü‚ê‚éPHP
   require_once "goodsAction.php";
-  //ì…ë ¥í•œ ê°’ì´ ìˆ«ìì¸ì§€ íŒë‹¨
-  if(isset($_POST['inputNum']) && is_numeric($_POST['num'])){
+  
+	//ƒ†[ƒU[‚ª¤•i‚Ì‰½ŒÂ”ƒ‚¤‚©Œˆ‚ß‚Ä“ü‚ê‚éƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚ç
+	if(isset($_POST['inputNum']) && is_numeric($_POST['num'])){
 
-    print "<script>alert('ìƒí’ˆì„ ë‹´ì•˜ìŠµë‹ˆë‹¤.');</script>";
+		print "<script>alert('EE’ˆEEE´E˜ìŠµEˆë‹¤.');</script>";
 
-    $numMenu    = $_POST['num'];
-    $nameMenu   = $_POST['menu_name'];
-    $imgMenu    = $_POST['menu_img'];
-    $priceMenu  = $_POST['menu_price'];
-    $goods_func = new goodsfunc();
+		$numMenu    = $_POST['num'];
+		$nameMenu   = $_POST['menu_name'];
+		$imgMenu    = $_POST['menu_img'];
+		$priceMenu  = $_POST['menu_price'];
+		$goods_func = new goodsfunc();
 
-    //ì¬ê³ ë¥¼í™•ì¸í•˜ê³  ì—…ë°ì´íŠ¸ í•˜ëŠ” í•¨ìˆ˜
-    $goods_func->SetUpdateBalance($nameMenu, $numMenu);
-    //ì¥ë°”êµ¬ë‹ˆì— ì €ì¥
-    $goods_func->SetInputCart($nameMenu, $numMenu, $imgMenu, $priceMenu);
+		//ƒJ[ƒg‚É“ü‚ê‚½‚çİŒÉ‚ğŒ¸‚ç‚·
+		$goods_func->SetUpdateBalance($nameMenu, $numMenu);
 
-    print "<script>history.go(-1);</script>";
+		//ƒJ[ƒg‚É¤•i‚ğ“ü‚ê‚é
+		$goods_func->SetInputCart($nameMenu, $numMenu, $imgMenu, $priceMenu);
 
-  }else {
+		print "<script>history.go(-1);</script>";
 
-    print "<script>alert('ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”');</script>";
-    print "<script>history.go(-1);</script>";
+	}else {
 
-  }
+		print "<script>alert('E«Eë¥¼ EE ¥ú±˜ì„¸EE);</script>";
+		print "<script>history.go(-1);</script>";
+
+	}	
 
 ?>

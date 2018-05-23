@@ -1,24 +1,26 @@
 <?php
-//ëª¨ë“  ì…ë ¥ë°›ì€ ìƒí’ˆì •ë³´ë¥¼ ë°›ì•„ ì„¸ì…˜ì— ì €ì¥í•˜ëŠ” PHP
-//ì €ì¥ëœ ëª¨ë“œ ìƒí’ˆë“¤ì„ ì ì–´ì•¼ í•œë‹¤
-// HACK:ìƒí’ˆì´ ëŠ˜ì–´ë‚ ë•Œë§ˆë‹¤ ê³„ì†í•´ì„œ ê¸€ì„ ì¶”ê°€í•´ì•¼í•˜ê¸° ë•Œë¬¸ì— ë¶ˆí¸í•˜ë‹¤
+//‘S‚Ä‚Ì¤•i‚ğSESSION‚É•Û‘¶‚·‚é¨‘S‚Ä‚Ìƒy[ƒW‚Åƒf[ƒ^‚ğˆµ‚¤‚½‚ß
+//HACK:¤•i‚ª’Ç‰Á‚³‚ê‚éŸ‘æ‚É‚»‚Ì¤•i‚É“–‚½‚éƒR[ƒh‚ğ‘‚©‚È‚¯‚ê‚Î‚È‚ç‚È‚¢¨C³•K—v
 	session_start();
 
-	//
 	if(isset($_POST['coke_num'])){
 		if(is_numeric($_POST['coke_num'])){
-			print "<script>alert('ìƒí’ˆì„ ë‹´ì•˜ìŠµë‹ˆë‹¤.')</script>";
-      $_SESSION['coke_num'] = $_POST['coke_num'];
-      print "<script>window.close();</script>";
+
+			print "<script>alert('¤•i“ü‚ê‚Ü‚µ‚½')</script>";
+			$_SESSION['coke_num'] = $_POST['coke_num'];
+			print "<script>window.close();</script>";
+
 		}else{
-			print "<script>alert('ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”');</script>";
-      print "<script>history.go(-1)</script>";
+
+			print "<script>alert('”š‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢');</script>";
+			print "<script>history.go(-1)</script>";
+
 		}
 	}
 
   if(isset($_POST['sprite_num'])){
 		if(is_numeric($_POST['sprite_num'])){
-			print "<script>alert('ìƒí’ˆì„ ë‹´ì•˜ìŠµë‹ˆë‹¤.')</script>";
+			print "<script>alert('EE’ˆEEE´E˜ìŠµEˆë‹¤.')</script>";
       $_SESSION['sprite_num'] = $_POST['sprite_num'];
       print "<script>window.close();</script>";
 		}else{
@@ -28,44 +30,44 @@
 
 	if(isset($_POST['burger1_num'])){
 		if(is_numeric($_POST['burger1_num'])){
-			print "<script>alert('ìƒí’ˆì„ ë‹´ì•˜ìŠµë‹ˆë‹¤.')</script>";
+			print "<script>alert('EE’ˆEEE´E˜ìŠµEˆë‹¤.')</script>";
       $_SESSION['burger1_num'] = $_POST['burger1_num'];
       print "<script>window.close();</script>";
 		}else{
-			print "<script>alert('ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”');</script>";
+			print "<script>alert('E«Eë¥¼ EE ¥ú±˜ì„¸EE);</script>";
     	print "<script>history.go(-1)</script>";
 		}
   }
 
 	if(isset($_POST['burger2_num'])){
 		if(is_numeric($_POST['burger2_num'])){
-			print "<script>alert('ìƒí’ˆì„ ë‹´ì•˜ìŠµë‹ˆë‹¤.')</script>";
+			print "<script>alert('EE’ˆEEE´E˜ìŠµEˆë‹¤.')</script>";
       $_SESSION['burger2_num'] = $_POST['burger2_num'];
     	print "<script>window.close();</script>";
 		}else{
-			print "<script>alert('ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”');</script>";
+			print "<script>alert('E«Eë¥¼ EE ¥ú±˜ì„¸EE);</script>";
       print "<script>history.go(-1)</script>";
 		}
 	}
 
 	if(isset($_POST['burger3_num'])){
 		if(is_numeric($_POST['burger3_num'])){
-			print "<script>alert('ìƒí’ˆì„ ë‹´ì•˜ìŠµë‹ˆë‹¤.')</script>";
+			print "<script>alert('EE’ˆEEE´E˜ìŠµEˆë‹¤.')</script>";
       $_SESSION['burger3_num'] = $_POST['burger3_num'];
       print "<script>window.close();</script>";
 		}else{
-			print "<script>alert('ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”');</script>";
+			print "<script>alert('E«Eë¥¼ EE ¥ú±˜ì„¸EE);</script>";
       print "<script>history.go(-1)</script>";
 		}
 	}
 
  	if(isset($_POST['burger4_num'])){
 		if(is_numeric($_POST['burger4_num'])){
-			print "<script>alert('ìƒí’ˆì„ ë‹´ì•˜ìŠµë‹ˆë‹¤.')</script>";
+			print "<script>alert('EE’ˆEEE´E˜ìŠµEˆë‹¤.')</script>";
       $_SESSION['burger4_num'] = $_POST['burger4_num'];
       print "<script>window.close();</script>";
 		}else{
-			print "<script>alert('ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”');</script>";
+			print "<script>alert('E«Eë¥¼ EE ¥ú±˜ì„¸EE);</script>";
       print "<script>history.go(-1)</script>";
 		}
 	}

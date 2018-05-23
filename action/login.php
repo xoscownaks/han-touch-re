@@ -1,11 +1,9 @@
 <?php
-//ë¡œê·¸ì¸ í•˜ê¸° ìœ„í•œ PHP
-//DBì— ì €ì¥ëœ ì •ë³´ì™€ ë¹„êµí•´ì„œ ì •ë³´ê°€ ìˆìœ¼ë©´ ë¡œê·¸ì¸ ì„±ê³µ í•˜ë©° ì„¸ì…˜ì— ì €ì¥
-
+//ƒƒOƒCƒ“‚·‚é‚½‚ß‚ÌPHP
   session_start();
   require_once "../DB/mydb.php";
 
-  //IDì™€ PASSWORDë¥¼ ê°€ì ¸ì™€ DBì— ì •ë³´ê°€ ìˆëŠ”ì§€ í™•ì¸í•œë‹¤.
+  //IDApassword‚ÅŠù‘¶‚É‚ ‚é‚©‚Ç‚¤‚©Šm”F‚·‚é
   try {
     $pdo = db_connect();
     $sql = "SELECT * FROM members where id=:id AND password=:password";
@@ -16,25 +14,27 @@
     $result = $stt->rowCount();
     $row = $stt->fetch(PDO::FETCH_ASSOC);
 
-    //DBì— ì •ë³´ê°€ ì—†ë‹¤ë©´
+    //DB‚É‚È‚¢ƒƒOƒCƒ“î•ñ‚È‚ç
     if(!$result){
-        print ("<script>window.alert('ì•„ì´ë”” ë˜ëŠ” íŒ¨ìŠ¤ì›Œë“œë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.');
+
+        print ("<script>window.alert('ID‚Ü‚½‚Ípassword‚ğŠm”F‚µ‚Ä‰º‚³‚¢');
         history.go(-1);
         </script>");
+
     }//end of if(!$result)
     else{
-        //DBì— ì •ë³´ê°€ ìˆë‹¤ë©´ ë¡œê·¸ì¸ì„±ê³µ ë¶€ë¶„
+        //DB‚É‚ ‚éƒƒOƒCƒ“î•ñ‚È‚ç
         $db_pass = $row['password'];
         print $_POST['password'];
         print $db_pass;
 
         if($_POST['password'] == $db_pass){
-          print ("<script>alert('ë¡œê·¸ì¸ ì„±ê³µ.')</script>");
+			print ("<script>alert('ƒƒOƒCƒ“¬Œ÷')</script>");
 
-          $_SESSION['userid'] = $_POST['id'];
-          $_SESSION['password'] = $_POST['password'];
+			$_SESSION['userid'] = $_POST['id'];
+			$_SESSION['password'] = $_POST['password'];
 
-          print ("<script>location.replace('../index.php');</script>");
+			print ("<script>location.replace('../index.php');</script>");
         }//end of if($_POST['password'] == $db_pass)
     }//end of if(!$result) else
   } catch (PDOException $e) {

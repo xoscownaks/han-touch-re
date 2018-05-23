@@ -1,14 +1,15 @@
 <?php
-//μƒν’κ³Ό κ΄€λ ¨λ ν–‰μ„λ“¤
   session_start();
+  require_once "../DB/mydb.php";
+
+  //¤•i‚Μs“®‚ΙΦ‚·‚ιƒNƒ‰ƒX
   class GoodsFunc{
 
-    //μƒν’κ³Ό μλ‰μ„ λ°›μ•„ μ¬κ³ λ¥Ό ν™•μΈν•κ³  μ—…λ°μ΄νΈν•λ” ν•¨μ
+    //$nameMenu¤•i‚Μ–Ό‘OA‰½Β”ƒ‚¤‚©‚Μ”‚ΕέΙ‚πƒAƒbƒvƒf[ƒg
     function SetUpdateBalance($nameMenu, $numMenu){
-      require_once "../DB/mydb.php";
+    try {
 
-      //μ„ νƒν• λ©”λ‰΄μ DBλ¥Ό μμ •
-      try {
+		//¤•i‚ΜέΙ‚πζ‚ι
         $pdo            = db_connect();
         $sql            = "SELECT * FROM goods WHERE menu_name = :menuname";
 
@@ -17,25 +18,31 @@
         $stt->execute();
         $row            = $stt->fetch(PDO::FETCH_ASSOC);
 
-        //ν„μ¬ μ¬κ³ κ°€ μ—†λ‹¤λ©΄
+        //έΙ‚ª‚Θ‚Άκ‡
         if($row['menu_balance'] < 0){
-          print "<script>alert('ν„μ¬ μ¬κ³ κ°€ μ—†μµλ‹λ‹¤.');</script>";
+
+          print "<script>alert('έΙ‚ª‚ ‚θ‚ά‚Ή‚ρ.');</script>";
           print "<script>history.go(-1);</script>";
-        }
-        //μ£Όλ¬Έμλ‰ λ³΄λ‹¤ μ¬κ³ λ‰μ΄ μ λ‹¤λ©΄
-        else {
-          if($row['menu_balance'] - $numMenu < 0){
-            print "<script>alert('ν„μ¬ μ¬κ³ κ°€ μ—†μµλ‹λ‹¤.');</script>";
-            print "<script>history.go(-1);</script>";
-          }else {
-            //μ£Όλ¬Έ μλ‰μ΄ μ¶©λ¶„ν•λ‹¤λ©΄
-            $newbalance = $row['menu_balance'] - $numMenu;
-            $sql        = "UPDATE goods SET menu_balance=:newbalance WHERE menu_name=:menuname";
-            $stt        = $pdo->prepare($sql);
-            $stt->bindValue(':newbalance',  $newbalance);
-            $stt->bindValue(':menuname',    $nameMenu);
-            $stt->execute();
-          }
+
+        }else {
+		//έΙ‚ª‚ ‚ικ‡
+			
+			//“ό—Ν‚µ‚½”‚ζ‚θέΙ‚ª­‚Θ‚Άκ‡
+			if($row['menu_balance'] - $numMenu < 0){
+
+				print "<script>alert('ϊ΄E¬ E¬E E€ EEµEλ‹¤.');</script>";
+				print "<script>history.go(-1);</script>";
+
+			}else {
+
+            //έΙ‚ª\•ª‚Θ‚η“ό—Ν‚³‚κ‚Δ‚Ά‚ι”‚Ι“–‚½‚ιέΙ‚Μ”‚πΈ‚η‚·
+				$newbalance = $row['menu_balance'] - $numMenu;
+				$sql        = "UPDATE goods SET menu_balance=:newbalance WHERE menu_name=:menuname";
+				$stt        = $pdo->prepare($sql);
+				$stt->bindValue(':newbalance',  $newbalance);
+				$stt->bindValue(':menuname',    $nameMenu);
+				$stt->execute();
+			}
         }
 
       } catch (Exception $e) {
@@ -43,71 +50,70 @@
       }
     }
 
-    //μ¥λ°”κµ¬λ‹μ— μ €μ¥ν•λ” ν•¨μ
+    //ƒJ[ƒg‚Ι¤•i‚π“ό‚κ‚ιƒNƒ‰ƒX
     function SetInputCart($nameMenu, $numMenu, $imgMenu, $priceMenu){
-      try {
-        require_once "../DB/mydb.php";
+		try {
+			$userId      = $_SESSION['userid'];
+			$pdo         = db_connect();
 
-        $userId      = $_SESSION['userid'];
-        $pdo         = db_connect();
+			$inputTime   = Date('Y-m-d H:i:s',time());
 
-        $inputTime   = Date('Y-m-d H:i:s',time());
+			$sql         = "INSERT INTO inputCart(inputmenu_id,   inputmenu_name,   inputmenu_num,
+												  inputmenu_date, inputmenu_img,    inputmenu_price)";
+			$sql        .= "VALUES ('$userId',      '$nameMenu',    '$numMenu',
+									'$inputTime',   '$imgMenu',     '$priceMenu')";
 
-        $sql         = "INSERT INTO inputCart(inputmenu_id,   inputmenu_name,   inputmenu_num,
-                                              inputmenu_date, inputmenu_img,    inputmenu_price)";
-        $sql        .= "VALUES ('$userId',      '$nameMenu',    '$numMenu',
-                                '$inputTime',   '$imgMenu',     '$priceMenu')";
+			$stt         = $pdo->prepare($sql);
+			$stt->execute();
 
-        $stt         = $pdo->prepare($sql);
-        $stt->execute();
-
-        // inputCart table(structure)
-        // inputmenu_id varchar(20) NOT NULL,
-        // inputmenu_name varchar(100) NOT NULL,
-        // inputmenu_num int NOT NULL,
-        // inputmenu_date datetime NOT NULL,
-        // inputmenu_img varchar(100) NOT NULL
-        // inputmenu_price int NOT NULL,
-      } catch (Exception $e) {
-        $e->getMessage();
-      }
+			// inputCart table(structure)
+			// inputmenu_id varchar(20) NOT NULL,
+			// inputmenu_name varchar(100) NOT NULL,
+			// inputmenu_num int NOT NULL,
+			// inputmenu_date datetime NOT NULL,
+			// inputmenu_img varchar(100) NOT NULL
+			// inputmenu_price int NOT NULL,
+		} catch (Exception $e) {
+			$e->getMessage();
+		}
     }
 
-    //μ¬κ³ λ‰μ„ μ›λλ΅ λλλ¦°λ‹¤.
+    //έΙ‚π³‚Ι–ί‚·
     function backbalance($menu_name, $menu_num){
-      require_once "../DB/mydb.php";
-      try {
-        //ν•΄λ‹Ή μƒν’μ ν„ μ¬κ³ λ‰μ„ κ°€μ Έμ™€μ„
-        //λ§¤κ°λ³€μλ΅ λ„£μ€ μμ™€ λ”ν•μ—¬ μ¬κ³ λ¥Ό λ³€κ²½ν•λ‹¤.
-        //goods
-        // menu_name varchar(100) NOT NULL,
-      	// menu_img varchar(500) NOT NULL,
-        // menu_price int NOT NULL,
-      	// menu_balance int NOT NULL,
-        // menu_calorie varchar(100) NOT NULL,
-        // menu_explain varchar(500)
-        $pdo = db_connect();
-        $sql = "SELECT menu_balance FROM goods WHERE menu_name = :menuname";
-        $stt = $pdo->prepare($sql);
-        $stt->bindValue(':menuname',$menu_name);
-        $stt->execute();
-        $result = $stt->rowCount();
+	     
+		//•Ϋ‘¶‚³‚κ‚Δ‚Ά‚ι”‚πζ‚Α‚Δ‚»‚±‚ΙƒJ[ƒg‚Ι•Ϋ‘¶‚³‚κ‚Δ‚Ά‚ι¤•i‚Μ”‚π‰Α‚¦‚ι
+		try {
+			//goods
+			// menu_name varchar(100) NOT NULL,
+      		// menu_img varchar(500) NOT NULL,
+			// menu_price int NOT NULL,
+      		// menu_balance int NOT NULL,
+			// menu_calorie varchar(100) NOT NULL,
+			// menu_explain varchar(500)
+			$pdo = db_connect();
+			$sql = "SELECT menu_balance FROM goods WHERE menu_name = :menuname";
+			$stt = $pdo->prepare($sql);
+			$stt->bindValue(':menuname',$menu_name);
+			$stt->execute();
+			$result = $stt->rowCount();
 
-        if($result){
-          $row = $stt->fetch(PDO::FETCH_ASSOC);
-          $newbalance = $row['menu_balance'] + $menu_num;
+			if($result){
+			  $row = $stt->fetch(PDO::FETCH_ASSOC);
+			  $newbalance = $row['menu_balance'] + $menu_num;
 
-          $sql = "update goods set menu_balance = $newbalance WHERE menu_name = '$menu_name'";
+			  $sql = "update goods set menu_balance = $newbalance WHERE menu_name = '$menu_name'";
 
-          $stt = $pdo->prepare($sql);
-          $stt->execute();
-        }
-      } catch (Exception $e) {
-        $e->getMessage();
-      }
-    }
+			  $stt = $pdo->prepare($sql);
+			  $stt->execute();
 
-    // //λª©λ΅μ—μ„ μ„ νƒν• λ¬Όν’μ„ μ‚­μ 
+			}
+		  } catch (Exception $e) {
+			$e->getMessage();
+		  }
+	}
+
+    //¤•i‚πν‚·‚ι
+	//history‚Ζ‚Ά‚¤‚Μ‚ΝH
     function deletehistory($buymenu_name, $buymenu_num){
       require_once "../DB/mydb.php";
       try {
@@ -120,7 +126,10 @@
         // buymenu_img varchar(500) NOT NULL,
         // buymenu_price int NOT NULL
         $pdo = db_connect();
-        $sql = "DELETE FROM buyhistory WHERE buymenu_id = '$id' AND buymenu_name = '$buymenu_name' AND buymenu_num = $buymenu_num";
+
+        $sql = "DELETE FROM buyhistory	WHERE buymenu_id	= '$id' 
+										AND buymenu_name	= '$buymenu_name' 
+										AND buymenu_num		= $buymenu_num";
 
         $stt = $pdo->prepare($sql);
         $stt->execute();
@@ -130,38 +139,37 @@
       }
     }
 
-    //μƒν’μ— λ€ν• μ •λ³΄λ¥Ό λ°›μ•„μ„ μƒν’μ„ μƒλ΅­κ² λ“±λ΅
+    //V‚½‚Ι¤•i‚π“o^‚·‚ι
     function SetNewGoods($nameMenu,     $imgMenu,   $priceMenu,   $balanceMenu,
                          $calorieMenu,  $explainMenu){
-      require_once "../DB/mydb.php";
-      try {
-        $pdo    = db_connect();
+		try {
+			$pdo    = db_connect();
 
-        $sql    = "INSERT INTO goods(menu_name,     menu_img,     menu_price,
-                                     menu_balance,  menu_calorie, menu_explain)";
-        $sql   .= "VALUES('$nameMenu',      '$imgMenu',       '$priceMenu',
-                          '$balanceMenu',   '$calorieMenu',   '$explainMenu')";
+			$sql    = "INSERT INTO goods(menu_name,     menu_img,     menu_price,
+										 menu_balance,  menu_calorie, menu_explain)";
+			$sql   .= "VALUES('$nameMenu',      '$imgMenu',       '$priceMenu',
+							  '$balanceMenu',   '$calorieMenu',   '$explainMenu')";
 
-        $stt    = $pdo->prepare($sql);
-        $stt->execute();
-        $result = $stt->rowCount();
+			$stt    = $pdo->prepare($sql);
+			$stt->execute();
+			$result = $stt->rowCount();
 
-        if($result){
-          print "<script>alert('μƒν’ λ“±λ΅ μ™„λ£')</script>";
-          print "<script>location.replace('../index.php');</script>";
-        }
+			if($result){
+			  print "<script>alert('EE’ E±EEEE£E)</script>";
+			  print "<script>location.replace('../index.php');</script>";
+			}
 
-        // goods tabel(structure)
-        // menu_name varchar(100) NOT NULL,
-        // menu_img varchar(500) NOT NULL,
-        // menu_price int NOT NULL,
-        // menu_balance int NOT NULL,
-        // menu_calorie varchar(100) NOT NULL,
-        // menu_explain varchar(500)
+			// goods tabel(structure)
+			// menu_name varchar(100) NOT NULL,
+			// menu_img varchar(500) NOT NULL,
+			// menu_price int NOT NULL,
+			// menu_balance int NOT NULL,
+			// menu_calorie varchar(100) NOT NULL,
+			// menu_explain varchar(500)
 
-      } catch (Exception $e) {
-        $e->getMessage();
-      }
-    }//end of SetNewGoods Function
-  }//end of GoodsFunc Class
+		  } catch (Exception $e) {
+			$e->getMessage();
+		  }
+		}//end of SetNewGoods Function
+	  }//end of GoodsFunc Class
 ?>

@@ -1,10 +1,10 @@
 <?php
+//ÉJÅ[ÉgÇ≈çwì¸åàíËÉ{É^ÉìÇâüÇ∑Ç∆é¿çsÇ≥ÇÍÇÈphp
+//ÉJÅ[ÉgÇ≈è§ïiÇçÌèúÇ∑ÇÈ
   require_once "../DB/mydb.php";
 
-  $id = $_POST['id'];
+  $menu_id = $_POST['id'];
 
-  //ÏµúÏ¢ÖÏ†ÅÏúºÎ°ú Íµ¨Îß§ Í≤∞Ï†ïÏùÑ ÎàÑÎ•¥Î©¥
-  //Ïπ¥Ìä∏ ÏóêÏÑú Ìï¥Îãπ Î™©Î°ùÏùÑ ÏÇ≠Ï†úÌïúÎã§
   try {
     // buymenu_id varchar(20) NOT NULL,
     // buymenu_name varchar(100) NOT NULL,
@@ -14,13 +14,18 @@
     // buymenu_price int NOT NULL
     $pdo = db_connect();
 
-    $sql = "DELETE FROM buyhistory WHERE buymenu_id = '$id'";
+    $sql = "DELETE FROM buyhistory WHERE buymenu_id = '$menu_id'";
+
     $stt = $pdo->prepare($sql);
     $stt->execute();
-    print "<script>alert('Íµ¨Îß§ ÏÑ±Í≥µ')</script>";
+
+    print "<script>alert('ÅE¨ÅE§ ÅE±ÅEµ')</script>";
     print "<script>location.replace('../index.php');</script>";
+
   } catch (Exception $e) {
+
     $e->getMessage();
+
   }
 
 ?>

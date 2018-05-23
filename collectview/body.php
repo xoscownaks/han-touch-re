@@ -12,10 +12,10 @@
       $(document).ready(function(){
         $('.bxslider').bxSlider({
           mode:'horizontal', //default : 'horizontal', options: 'horizontal', 'vertical', 'fade'
-          speed:800, //default:500 ì´ë¯¸ì§€ë³€í™˜ ì†ë„
-          auto: true, //default:false ìë™ ì‹œì‘
-          captions: false, // ì´ë¯¸ì§€ì˜ title ì†ì„±ì´ ë…¸ì¶œëœë‹¤.
-          autoControls: false, //default:false ì •ì§€,ì‹œì‘ ì½˜íŠ¸ë¡¤ ë…¸ì¶œ, css ìˆ˜ì •ì´ í•„ìš”
+          speed:800, //default:500 E´E¸E€E€úµEEë„
+          auto: true, //default:false Eë™ Eœì‘
+          captions: false, // E´E¸E€EEtitle Eì„±E´ E¸EœëœE¤.
+          autoControls: false, //default:false E•ì§€,Eœì‘ E˜íŠ¸E¤ E¸EE css E˜ì •ì´ ú±Eš”
         });
       });
     </script>

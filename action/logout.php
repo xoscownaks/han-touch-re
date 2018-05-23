@@ -1,15 +1,16 @@
 <?php
-//ë¡œê·¸ì•„ì›ƒì„ í•˜ê¸° ìœ„í•œ php
+//ƒƒOƒAƒEƒg‚·‚éphp
   session_start();
-  //ëª¨ë“  ì„¸ì…˜ì„ ì œê±°í•˜ëŠ” í•¨ìˆ˜
+  //‘S‚Ä‚ÌSESSION‚Ìî•ñ‚ğíœ‚·‚é
   function logout(){
     session_destroy();
   }
-  
-  //ë¡œê·¸ì•„ì›ƒ í´ë¦­ì‹œ ëª¨ë“  ì„¸ì…˜ ì œê±°ê·¸ë¦¬ê³  ë©”ì¸ìœ¼ë¡œ ì´ë™
+
+  //logoutƒ{ƒ^ƒ“‰Ÿ‚·‚ÆÀs‚ÆƒƒCƒ“ƒy[ƒW‚É–ß‚é
   if(isset($_POST['logout'])){
-    print "<script>alert('ë¡œê·¸ì•„ì›ƒ')</script>";
-    logout();
-    print "<script>location.replace('../index.php');</script>";
+		print "<script>alert('Eœê·¸EE›ƒ')</script>";
+		logout();
+		print "<script>location.replace('../index.php');</script>";
   }
+
 ?>

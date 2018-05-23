@@ -1,30 +1,27 @@
 <?php
-//ë‹¤ìš´ë¡œë“œ í•˜ê¸° ìœ„í•œ PHP
-//íŒŒì¼ ì´ë¦„ì„ ê°€ì ¸ì™€ì„œ í•´ë‹¹ ê²½ë¡œì— ìžˆëŠ” íŒŒì¼ì„ ì½ëŠ”ë‹¤.
+//ƒT[ƒo‚É•Û‘¶‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ðƒ_ƒEƒ“ƒ[ƒh‚·‚éPHP
+//$_GET['dow']‚Íƒtƒ@ƒCƒ‹‚Ì–¼‘O
   if(isset($_GET['dow'])){
-    //íŒŒì¼ì˜ ê²½ë¡œì™€ íŒŒì¼ì´ë¦„
+    //Œo˜H
     $file = "C:xampp/htdocs/hangiphp/shoppingmall/upload/".$_GET['dow'];
 
-    //// ì§€ê¸ˆ ìˆ˜í–‰ë˜ëŠ” ì¢…ë¥˜
+    //ƒ_ƒEƒ“ƒ[ƒh‚ÌŽÀs‚·‚éŽí—ÞAƒ_ƒEƒ“ƒ[ƒh‚·‚éƒf[ƒ^‚Ìƒ^ƒCƒv‚ÌÝ’è
     header('Content-Description: File Transfer');
-    //// ë‹¤ìš´ë¡œë“œë  ë°ì´í„° íƒ€ìž…ì„ ì–¸ ì „ë¶€ ê°€ëŠ¥
     header('Content-Type: application/octet-stream');
-    // ë‹¤ìš´ë¡œë“œë  íŒŒì¼ëª…, basenameì„ ì‚¬ìš©í•˜ë©´ ê²½ë¡œì—ì„œ ê°€ìž¥ ë§ˆì§€ë§‰ì˜ íŒŒì¼ì´ë¦„ë§Œ ê°€ì ¸ì˜¨ë‹¤.
     header('Content-Disposition: attachment; filename='.basename($file));
 
-    // ì•„ëž˜ì˜ 3ì¤„ì€ ìºì‹œì˜ ì‚¬ìš©ì—¬ë¶€ì— ê´€ë ¨ëœ ì‚¬í•­.
+    //cash‚ÌŽg—p‚É‚Â‚¢‚Ä
     header("Expires: 0");
     header('Cache-Control: must-revalidate');
     header('Pragma:public');
 
+	//ƒtƒ@ƒCƒ‹‚ð“Ç‚ñ‚Åtxt, img‚Í‚»‚Ì‚Ü‚ÜŒ©‚¹‚é
     header('Content-Length : '.filesize($file));
-    //readfileì€ ë§ê·¸ëŒ€ë¡œ íŒŒì¼ì„ ì½ëŠ” í•¨ìˆ˜
-    //txt,imgëŠ” ê·¸ëŒ€ë¡œ í™”ë©´ì— ë³´ì—¬ì¤„ ìˆ˜ ìžˆìœ¼ë©° ì¼ë°˜ì ìœ¼ë¡œ íŒŒì¼ì„ ë§í¬í•´ì„œ  ê±¸ë©´ ë‹¤ìš´ë¡œë“œì— ì‚¬ìš©
     readfile($file);
     exit;
 
   }else{
-    print "<script>alert('ì‹¤íŒ¨')</script>";
+    print "<script>alert('Ž¸”s')</script>";
     exit;
   }
 ?>

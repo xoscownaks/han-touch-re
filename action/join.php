@@ -1,38 +1,39 @@
 <?php
-//ê°€ì…í•˜ê¸° ìœ„í•œ PHP
-//DBì— ì €ì¥ëœ ì •ë³´ì™€ ë¹„êµí•´ì„œ ì •ë³´ê°€ ìˆìœ¼ë©´ ë‹¤ì‹œ ì…ë ¥í•˜ê³ 
-//ì •ë³´ê°€ ì—†ìœ¼ë©´ DBì—ìƒˆë¡­ê²Œ ì €ì¥ëœë‹¤.
+//ƒ†[ƒU[‚ª‰Á“ü‚·‚é‚½‚ß‚ÌPHP
   require_once "../DB/mydb.php";
 
-  $m_Userid       = $_POST['id'];
-  $m_Userpassword = $_POST['password'];
+  $user_id       = $_POST['id'];
+  $user_password = $_POST['password'];
 
-  try {
-    $pdo = db_connect();
+	try {
+		$pdo = db_connect();
 
-    //ê¸°ì¡´ì˜ DBì˜ ë‚´ìš©ì„ ê°€ì ¸ì™€ì„œ ë¹„êµí•œ ë‹¤ìŒ ê¸°ì¡´ê³¼ ì¤‘ë³µë˜ë©´ ë‹¤ì‹œ ì…ë ¥í•˜ê³ 
-    //ê¸°ì¡´ì˜ ë‚´ìš©ì´ ì—†ìœ¼ë©´ ê°€ì… ëœë‹¤.
-    $sql = "SELECT * FROM members WHERE id = :id";
-    $stt = $pdo->prepare($sql);
-    $stt->bindValue(':id',$id);
-    $stt->execute();
-    $checkidCount = $stt->rowCount();
+		//Šù‘¶‚É‰Á“ü‚³‚ê‚Ä‚¢‚é‚©‚ğŠm”F‚·‚é
+		$sql = "SELECT * FROM members WHERE id = :id";
+		$stt = $pdo->prepare($sql);
+		$stt->bindValue(':id',$user_id);
+		$stt->execute();
+		$checkidCount = $stt->rowCount();
 
-    if($checkidCount){
-          echo "<script>alert('ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì•„ì´ë”” ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”');</script>";
-          require_once "../form/join_form.php";
-    }else {
-      $sql = "INSERT INTO members VALUES(:id, :password)";
-      $stt = $pdo->prepare($sql);
-      $stt->bindValue(':id',$id);
-      $stt->bindValue(':password',$password);
-      $stt->execute();
+		//Šù‘¶‚É‘¶İ‚³‚ê‚Ä‚¢‚½‚ç
+		if($checkidCount){
 
-      print "<script>alert('ê°€ì…ë˜ì—ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ë¡œê·¸ì¸ í•´ì£¼ì„¸ìš”');</script>";
-      print ("<script>location.replace('../index.php');</script>");
-    }
+				echo "<script>alert('‘¶İ‚µ‚Ä‚¢‚éID‚Å‚·');</script>";
+				require_once "../form/join_form.php";
 
-  } catch (PDOException $e) {
-    $e->getMessage();
-  }
+		}else {
+			//V‹Kƒ†[ƒU[‚È‚ç
+			$sql = "INSERT INTO members VALUES(:id, :password)";
+			$stt = $pdo->prepare($sql);
+			$stt->bindValue(':id',$user_id);
+			$stt->bindValue(':password',$user_password);
+			$stt->execute();
+
+			print "<script>alert('¬Œ÷‚Å‚·B‚Ü‚½ƒƒOƒCƒ“‚µ‚Ä‚­‚¾‚³‚¢');</script>";
+			print ("<script>location.replace('../index.php');</script>");
+		}
+
+	} catch (PDOException $e) {
+		$e->getMessage();
+	}
 ?>

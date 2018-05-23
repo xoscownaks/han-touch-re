@@ -1,9 +1,8 @@
 <?php
-//DB에 입력한 값들을 저장하기 위한 PHP
+//�f���ɐV����post��o�^����
 	session_start();
 	require_once "../DB/mydb.php";
 
-	//게시판에 새로운 글을 등록
 	try {
 		/*
 		board_num int unsigned not null primary key auto_increment,
@@ -16,21 +15,19 @@
 		*/
 		$pdo = db_connect();
 		$sql = "INSERT INTO board(board_num,	board_title,		board_content,	board_date,
-															board_id,		board_password, board_file)";
+								�@board_id,		board_password,		board_file)";
 		$sql .= "VALUES(:num,:title,	:content,	:todaydate,	:id,	:password,	:file)";
 
-    //업로드한 파일의 이름, 서버에 저장된 임시파일명을 읽는다
-    //그리고 설정한 경로에 해당 이름으로 업로드 한다.
-    if(isset($_FILES['uploadfile']) && !$_FILES['uploadfile']["error"]){
+		if(isset($_FILES['uploadfile']) && !$_FILES['uploadfile']["error"]){
 
-        $fileName = $_FILES['uploadfile']['name'];
-        $tmpName = $_FILES['uploadfile']['tmp_name'];
+			$fileName = $_FILES['uploadfile']['name'];
+			$tmpName = $_FILES['uploadfile']['tmp_name'];
 
-        $location = "C:xampp/htdocs/hangiphp/shoppingmall/upload/".$fileName;
+			$location = "C:xampp/htdocs/hangiphp/shoppingmall/upload/".$fileName;
 
-        move_uploaded_file($tmpName,$location);
-        //print "<script>alert('업로드')</script>";
-    }
+			move_uploaded_file($tmpName,$location);
+
+		}
 
 		$stt = $pdo->prepare($sql);
 		$id = $_SESSION['userid'];
@@ -39,24 +36,25 @@
 		$content = $_POST['content'];
 		$date = Date('Y-m-d H:i:s');
 
-		//board_num은 auto increase를 붙여서 db를 만들었기 때문에
-		//아무것도 넣지 않으면 자동으로 숫자가 증가한다.
 		$stt->bindValue(':num',null);
 		$stt->bindValue(':title',$title);
 		$stt->bindValue(':content',$content);
 		$stt->bindValue(':todaydate',$date);
 		$stt->bindValue(':id',$id);
 		$stt->bindValue(':password',$password);
-    $stt->bindValue(':file',$fileName);
+		$stt->bindValue(':file',$fileName);
 
 		$stt->execute();
 
-    $result = $stt->rowCount();
-    if($result){
-    	print "<script>alert('글을 작성하였습니다.')</script>";
-    	print ("<script>location.replace('../form/boardform.php');</script>");
-    }
-  } catch (Exception $e) {
+		$result = $stt->rowCount();
+
+		if($result){
+
+    		print "<script>alert('�E��E�E�E�성����E�E��E�다.')</script>";
+    		print ("<script>location.replace('../form/boardform.php');</script>");
+
+		}
+	} catch (Exception $e) {
 		$e->getMessage();
 	}
 ?>

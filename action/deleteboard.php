@@ -1,29 +1,35 @@
 <?php
-//ê²Œì‹œíŒì˜ ê¸€ì„ ì‚­ì œí•˜ê¸° ìœ„í•œ PHP
-//ì‚­ì œí•˜ê¸° ìœ„í•´ ì…ë ¥í•œ ë¹„ë°€ë²ˆí˜¸ì™€ í˜„ì¬ ì‚¬ìš©ìì˜ ID,ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ë©´
-//ê¸€ì„ ì‚­ì œê°€ëŠ¥í•˜ë‹¤.
+//Œf¦”Â‚ÌPOST‚ğÁ‚·php
+
     require_once "../DB/mydb.php";
     session_start();
 
     $Bno = $_POST['bno'];
 
-    //í˜„ì¬ í´ë¦­í•œ ê²Œì‹œíŒì˜ ê²Œì‹œê¸€ë²ˆí˜¸ì™€ ìì‹ ì´ ì…ë ¥í•œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë¹„êµí•˜ì—¬
-    //ë§ë‹¤ë©´ ê·¸ ê²Œì‹œíŒì˜ ê²Œì‹œê¸€ë²ˆí˜¸ë¥¼ ì‚¬ìš©í•˜ì—¬ í•´ë‹¹ ê²Œì‹œê¸€ ì‚­ì œ
+	//POST‚ğì¬‚µ‚½ƒ†[ƒU[‚Ìpassword‚Æ“ü—Í‚µ‚½password‚ªˆê’v‚µ‚½‚çíœ
+	//ˆê’v‚µ‚È‚¢‚Æ‚µ‚È‚¢
     try{
         $pdo    = db_connect();
-        //dbì˜ ë¹„ë°€ë²ˆí˜¸ì™€ ì¼ì¹˜í•˜ë©´ ì‚­ì œ ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ í•˜ì§€ ì•ŠëŠ”ë‹¤
+        
         $DelPs  = $_POST['delete_check_password'];
-        $sql    = "SELECT * FROM board WHERE board_num =:board_n AND board_password=:board_ps";
+
+        $sql    = "SELECT * FROM board	WHERE		board_num@=@:board_n
+										AND		board_password@=@:board_ps";
+
         $stt = $pdo->prepare($sql);
         $stt->bindValue(':board_n',$Bno);
         $stt->bindValue(':board_ps',$DelPs);
         $stt->execute();
         $result = $stt->rowCount();
 
+		//ˆê’v‚Ìê‡íœ‚·‚é
         if($result && $_SESSION['password'] == $DelPs){
+
             $sql = "DELETE FROM board WHERE board_num=:board_n";
+
         }else{
-            print "<script>alert('ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”');history.back();</script>";
+
+            print "<script>alert('‚Ü‚½“ü—Í‚µ‚Ä‚­‚¾‚³‚¢');history.back();</script>";
 
         }
         $stt = $pdo->prepare($sql);
@@ -32,7 +38,8 @@
         $result = $stt->rowCount();
 
         if($result){
-            print "<script>alert('ì‚­ì œì™„ë£Œ')</script>";
+
+            print "<script>alert('íœŠ®—¹')</script>";
             print ("<script>location.replace('../form/boardform.php');</script>");
         }
     }catch (Exception $e){

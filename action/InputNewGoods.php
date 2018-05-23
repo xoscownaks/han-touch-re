@@ -1,42 +1,43 @@
 <?php
-//ìƒˆë¡œìš´ ìƒí’ˆì„ ë‹´ì€ë‹¤
+//V‚µ‚¢¤•i‚ğ“o˜^‚·‚é‚½‚ßî•ñ‚ğ®—‚·‚éPHP
   require_once "../DB/mydb.php";
   require_once "goodsAction.php";
 
   $menu_name = $_POST['menu_name'];
-
-  //ìƒˆë¡œìš´ ìƒí’ˆì— ëŒ€í•œ ì •ë³´ë¥¼ ë°›ì•„ì™€ ê¸°ì¡´ì˜ ìƒí’ˆê³¼ ë¹„êµí•˜ì—¬
-  //ê°™ì€ ì´ë¦„ì˜ ìƒí’ˆì´ ìˆëŠ” ê²ƒì„ í™•ì¸, ìƒí’ˆì˜ ì´ë¯¸ì§€ë¥¼ ì €ì¥ ë° ìƒí’ˆìƒì„±í•¨ìˆ˜ ì‹¤í–‰
+    
   try {
     $pdo = db_connect();
     $sql = "SELECT * FROM goods WHERE menu_name='$menu_name'";
     $stt = $pdo->prepare($sql);
     $stt->execute();
     $result = $stt->rowCount();
-    //ê¸°ì¡´ì˜ DBë¥¼ ê°€ì ¸ì™€ í•´ë‹¹í•˜ëŠ” ìƒí’ˆì´ ì´ë¯¸ ìˆë‹¤ë©´
+    //Šù‘¶‚Ì¤•i‚Ì’†‚Æ”ä‚×‚Ä“¯‚¶¤•i‚ª‚ ‚éê‡
     if($result){
-      print "<script>alert('ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ìƒí’ˆì…ë‹ˆë‹¤.')</script>";
+
+      print "<script>alert('E´E¸ E´E¬ú±˜ëŠ” EE’ˆEE‹ˆE¤.')</script>";
       print "<script>history.go(-1)</script>";
-    }//ìƒˆë¡œìš´ ìƒí’ˆì´ë¼ë©´
+
+    }//Šù‘¶‚Ì¤•i‚Ì’†‚Æ”ä‚×‚Ä“¯‚¶¤•i‚ª‚È‚¢ê‡
     else {
-      if(isset($_FILES['uploadfile']) && !$_FILES['uploadfile']["error"]){
-        //ì—…ë¡œë“œì‹œ í—ˆìš©í•  ì´ë¯¸ì§€ì˜ í™•ì¥ìë“¤
-        $imageKind = array ('image/jpeg', 'image/JPG', 'image/jpg', 'image/PNG', 'image/png');
-        //imageKindë‚´ì— ì—…ë¡œë“œí•œ íŒŒì¼ì˜ íƒ€ì…ì´ ìˆëŠ”ì§€ í™•ì¸
-        if(in_array($_FILES['uploadfile']['type'], $imageKind)){
-          $filename = $_FILES['uploadfile']['name'];
-          $filepath = $_FILES['uploadfile']['tmp_name'];
-          $location = "../src/".$filename;
-          move_uploaded_file($filepath,$location);
+		//ƒtƒ@ƒCƒ‹‚Ìî•ñ‚ğ‚ğ–³–‚Éæ‚Á‚½‚ç
+		if(isset($_FILES['uploadfile']) && !$_FILES['uploadfile']["error"]){
+			//ƒCƒ[ƒWƒtƒ@ƒCƒ‹‚Ìtype‚ğŒÀ’è‚³‚¹‚ÄƒCƒ[ƒW‚Ìƒtƒ@ƒCƒ‹‚©‚Ç‚¤‚©”»’f
+			$imageKind = array ('image/jpeg', 'image/JPG', 'image/jpg', 'image/PNG', 'image/png');
+			if(in_array($_FILES['uploadfile']['type'], $imageKind)){
 
-          $menu_name = $_POST['menu_name'];
-          $menu_img = "src/".$filename;
+				$filename = $_FILES['uploadfile']['name'];
+				$filepath = $_FILES['uploadfile']['tmp_name'];
+				$location = "../src/".$filename;
+				move_uploaded_file($filepath,$location);
 
-        }//end of if(in_array($_FILES['uploadfile']['type'], $imageKind)
-        else {
-          print "<script>alert('íŒŒì¼ì´ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤.')</script>";
-          print "<script>history.go(-1)</script>";
-        }//end of if(in_array($_FILES['uploadfile']['type'], $imageKind) else
+				$menu_name = $_POST['menu_name'];
+				$menu_img = "src/".$filename;
+
+			}//end of if(in_array($_FILES['uploadfile']['type'], $imageKind)
+			else {
+			  print "<script>alert('ƒtƒ@ƒCƒ‹‚Ìƒ^ƒCƒv‚ª³‚µ‚­‚È‚¢')</script>";
+			  print "<script>history.go(-1)</script>";
+			}//end of if(in_array($_FILES['uploadfile']['type'], $imageKind) else
       }//end of if(isset($_FILES['uploadfile']) && !$_FILES['uploadfile']["error"])
     }//end of else
     $menu_price = $_POST['menu_price'];
@@ -46,10 +47,13 @@
     $menu_explain = $_POST['menu_explain'];
 
     $goodsfunc = new goodsfunc();
-    $goodsfunc->inputNewGoods($menu_name,$menu_img,$menu_price,$menu_balance,$menu_calorie,$menu_explain);
+
+	//®—‚µ‚½î•ñ‚Å¤•i‚ğÀÛDB‚É“o˜^‚·‚é
+    $goodsfunc->inputNewGoods(	$menu_name,@	$menu_img,@	$menu_price,@
+								$menu_balance,	$menu_calorie,	$menu_explain);
 
   } catch (Exception $e) {
-    $e->getMessage();
+		$e->getMessage();
   }//end of try~catch
 
 

@@ -1,14 +1,15 @@
 <?php
-//ì „ì²´ì ì¸ ê²Œì‹œíŒì„ ë³´ì—¬ì£¼ê¸° ìœ„í•œ PHP
-//ìˆœë²ˆì„ ê¸°ì¤€ìœ¼ë¡œ DBì—ì„œ ëª¨ë“  SQLë¬¸ ì¶œë ¥
+//ŒfŽ¦”Â‚Ì“à—e‚ð•\Ž¦‚·‚éPHP
 	require_once "../DB/mydb.php";
 
+	//DB‚©‚çŽæ‚Á‚½ƒf[ƒ^‚ðreturn
 	function boardResult(){
 		try {
 
 			$pdo = db_connect();
 
 			$sql = "SELECT * FROM board ORDER BY board_num desc";
+
 			$stt = $pdo->prepare($sql);
 			$stt->execute();
 
